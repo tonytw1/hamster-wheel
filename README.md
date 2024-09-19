@@ -10,10 +10,11 @@ We added a Hall effect odometer to the wheel to track his mileage.
 
 Hall effect sensor
 
-Strong magnet
+Neodymium button magnet.
+Strong magnet for largest possible signal.
 
-Bluetooth Arduino board
-
+Bluetooth enabled Arduino board
+[Adafruit Feather nRF52](https://www.adafruit.com/product/3406)
 
 
 ## Approach
@@ -24,19 +25,18 @@ As the wheel revolves the magnet should trigger the sensor once per revolution.
 
 We'll use the Arduino to capture an incrementing count of the wheel revolutions.
 
-
 The Hall effect sensor has a digital output which could have been used to trigger a hardware interrupt
-on the Arduino. In practise it was not sensitive enough and did not trigger. 
+on the Arduino. In practice it was not sensitive to trigger in this setup.
 
-Instead, we poll the sensor's analouge output
+Instead, we poll the sensor's analogue output
 
-In the absense of the magnet this output averages around 480 units.
-In the presense of the magnet it can swing +- 30 to 50 units either way. 
+In the absence of the magnet this output averages around 480 units.
+In the presence of the magnet it can cause a swing of +- 30 to 50 units either way. 
+
 It's a fairly weak signal and requires fairly careful alignment on the sensor.
 
 The wheel wobbles quite abit; if I was doing this again I'd make sure I attached the magnet to the point
 where the wheel bows out the most.
-
 
 
 ## Code
@@ -49,13 +49,13 @@ The LED is useful for realigning the sensor after cleaning the enclosure.
 
 I'm using the Bluetooth beacon feature of the Adafruit board to broadcast the counter.
 When the count is incremented, it is written into the Bluetooth payload. The board will broadcast this value
-continously until it is next updated.
+continuously until it is next updated.
 
 A network connected Raspberry PI in another part of the house listens for these Bluetooth broadcasts and forwards them onto an MQTT channel.
-I've used this pattern before on my power meter integration and think it's a reaonable alteranative to having to install a fully networked
+I've used this pattern before on my [power meter integration](https://github.com/tonytw1/power-meter) and think it's a reasonable alternative to having to install a fully networked
 device in a small place. The Arduino board only needs 5V power; no wired or Wifi network connection.
 
-The count is progated via MQTT and ends up recorded in a Prometheus time series.
+The count is propagated via MQTT and ends up recorded in a Prometheus time series.
 I could see this trace immediately.
 
 
@@ -77,7 +77,7 @@ Averaging the rate of increase per second over a rolling 5 minute interval (to s
 ![Rate query](rate-query.png)
 
 
-Period of activity are clearly visible:
+Periods of activity are clearly visible:
 ![5 minute average RPM](rate-5m-ave-rpm.png)
 
 
@@ -87,5 +87,5 @@ Prometheus can also give the total revolutions for the last 24 hours.
 ![24 hour count](24hour.png)
 
 
-In theory I could set up an alert on this metric.
+In theory I could set up a Prometheus alert on this metric to flag unnoticed changes in exercise behaviour.
 
