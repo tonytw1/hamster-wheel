@@ -67,13 +67,19 @@ The first night with the counter in place produced this graph in Prometheus.
 ![Wheel revolution counts vs time](count-vs-time.png)
 
 3000 odd revolutions over 2 distinct sessions. The first session starts almost immediately after the lights are turned off.
-Given that the wheel is approximately 29cm in diameter this givens a distance of approximately 2.7km!
+The slope of the line is really consistent.
+
+Given that the wheel is approximately 29cm in diameter this given a distance of approximately 2.7km in 1 night!
 
 
-Prometheus can deal with counter resets and infer a rate of increase for us.
+Prometheus can correct for counter resets and infer the rate of increase for us.
 
-TODO how.
+Averaging the rate of increase per second over a rolling 5 minute interval (to smooth the graph) and multiplying by 60 to show revolutions per minute (RPM):
+![Rate query](rate-query.png)
 
+
+Period of activity are clearly visible:
+![5 minute average RPM](rate-5m-ave-rpm.png)
 
 
 
