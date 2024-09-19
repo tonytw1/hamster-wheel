@@ -1,6 +1,6 @@
 ## Hamster wheel odometer
 
-Our hamster is incredibly shy about using his exercise wheel and will not use it if anyone is watching.
+Our hamster (Zym) is incredibly shy about using his exercise wheel and will not use it if anyone is watching.
 
 We added a Hall effect odometer to the wheel to track his mileage.
 
