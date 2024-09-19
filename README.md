@@ -59,7 +59,6 @@ The count is progated via MQTT and ends up recorded in a Prometheus time series.
 I could see this trace immediately.
 
 
-
 ## Results
 
 The first night with the counter in place produced this graph in Prometheus.
@@ -82,5 +81,11 @@ Period of activity are clearly visible:
 ![5 minute average RPM](rate-5m-ave-rpm.png)
 
 
+Prometheus can also give the total revolutions for the last 24 hours.
 
+
+![24 hour count](24hour.png)
+
+
+In theory I could set up an alert on this metric.
 
