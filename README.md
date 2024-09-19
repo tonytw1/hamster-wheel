@@ -31,9 +31,11 @@ on the Arduino. In practice it was not sensitive to trigger in this setup.
 Instead, we poll the sensor's analogue output
 
 In the absence of the magnet this output averages around 480 units.
-In the presence of the magnet it can cause a swing of +- 30 to 50 units either way. 
+The presence of the magnet it can cause a swing of +- 30 to 50 units either way. 
 
 It's a fairly weak signal and requires fairly careful alignment on the sensor.
+
+The hamster can spin the wheel at ~ 60 RPM so a typical revolution takes around a second.
 
 The wheel wobbles quite abit; if I was doing this again I'd make sure I attached the magnet to the point
 where the wheel bows out the most.
